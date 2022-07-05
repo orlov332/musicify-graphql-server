@@ -6,7 +6,7 @@ type User {
   email: String!
 }
 
-type Query{
+type Query {
   user(id: ID!): User
   jwt(email: String!, password: String!): String!
 }

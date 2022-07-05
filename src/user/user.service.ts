@@ -1,12 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import axios from 'axios';
+import { UserDto } from './user.dto';
+
+const { USERS_URL } = process.env;
 
 @Injectable()
 export class UserService {
-  findOneById(id: string) {
-    return Promise.resolve(undefined);
+  async findOneById(id: string) {
+    return axios.get<UserDto>(`${USERS_URL}/${id}`).then((res) => res.data);
   }
 
-  generateJwt(email: string, password: string) {
-    return Promise.resolve(undefined);
+  async login(email: string, password: string): Promise<string> {
+    return axios
+      .post(`${USERS_URL}/login`, { email, password })
+      .then((res) => res.data.jwt);
   }
 }
