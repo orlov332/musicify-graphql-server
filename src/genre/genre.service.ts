@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
+import { GenreListRest, GenreRest } from './entities/genre.entity';
+import axios from 'axios';
+import { getParamObject } from '../utils';
+
+const { GENRES_URL } = process.env;
 
 @Injectable()
 export class GenreService {
@@ -8,12 +13,24 @@ export class GenreService {
     return 'This action adds a new genre';
   }
 
-  findAll() {
-    return `This action returns all genre`;
+  async findAll(
+    limit: number,
+    offset: number,
+    filter: string,
+  ): Promise<GenreListRest> {
+    return axios
+      .get<GenreListRest>(GENRES_URL, {
+        params: {
+          limit,
+          offset,
+          ...getParamObject(filter),
+        },
+      })
+      .then((res) => res.data);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+  async findOne(id: string) {
+    return axios.get<GenreRest>(`${GENRES_URL}/${id}`).then((res) => res.data);
   }
 
   update(id: number, updateGenreInput: UpdateGenreInput) {

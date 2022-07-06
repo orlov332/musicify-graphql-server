@@ -16,11 +16,18 @@ export interface UpdateArtistInput {
 }
 
 export interface CreateGenreInput {
-    exampleField?: Nullable<number>;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    country?: Nullable<string>;
+    year?: Nullable<string>;
 }
 
 export interface UpdateGenreInput {
-    id: number;
+    id: string;
+    name?: Nullable<string>;
+    description?: Nullable<string>;
+    country?: Nullable<string>;
+    year?: Nullable<string>;
 }
 
 export interface UserInput {
@@ -30,6 +37,12 @@ export interface UserInput {
     email: string;
 }
 
+export interface List {
+    limit: number;
+    offset: number;
+    total: number;
+}
+
 export interface Artist {
     exampleField?: Nullable<number>;
 }
@@ -37,8 +50,8 @@ export interface Artist {
 export interface IQuery {
     artists(): Nullable<Artist>[] | Promise<Nullable<Artist>[]>;
     artist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
-    genres(): Nullable<Genre>[] | Promise<Nullable<Genre>[]>;
-    genre(id: number): Nullable<Genre> | Promise<Nullable<Genre>>;
+    genres(limit: number, offset: number, filter: string): GenreList | Promise<GenreList>;
+    genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     user(id: string): Nullable<User> | Promise<Nullable<User>>;
     jwt(email: string, password: string): string | Promise<string>;
 }
@@ -49,12 +62,23 @@ export interface IMutation {
     deleteArtist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
     createGenre(createGenreInput: CreateGenreInput): Genre | Promise<Genre>;
     updateGenre(updateGenreInput: UpdateGenreInput): Genre | Promise<Genre>;
-    removeGenre(id: number): Nullable<Genre> | Promise<Nullable<Genre>>;
+    deleteGenre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     register(user: UserInput): User | Promise<User>;
 }
 
 export interface Genre {
-    exampleField?: Nullable<number>;
+    id: string;
+    name: string;
+    description: string;
+    country: string;
+    year: string;
+}
+
+export interface GenreList extends List {
+    items: Genre[];
+    limit: number;
+    offset: number;
+    total: number;
 }
 
 export interface User {

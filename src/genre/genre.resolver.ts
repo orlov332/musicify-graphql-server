@@ -1,10 +1,19 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GenreService } from './genre.service';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
+import { Genre, GenreList, IMutation, IQuery } from '../graphql.schema';
+import { GenreListRest, GenreRest } from './entities/genre.entity';
+import { restEntityToGraph, restListToGraph } from '../utils';
+
+type IGenreQuery = Pick<IQuery, 'genres' | 'genre'>;
+// type IGenreMutation = Pick<
+//   IMutation,
+//   'createGenre' | 'updateGenre' | 'deleteGenre'
+// >;
 
 @Resolver('Genre')
-export class GenreResolver {
+export class GenreResolver implements IGenreQuery {
   constructor(private readonly genreService: GenreService) {}
 
   @Mutation('createGenre')
@@ -12,14 +21,20 @@ export class GenreResolver {
     return this.genreService.create(createGenreInput);
   }
 
-  @Query('genre')
-  findAll() {
-    return this.genreService.findAll();
+  @Query('genres')
+  async genres(
+    @Args('limit') limit: number,
+    @Args('offset') offset: number,
+    @Args('filter') filter: string,
+  ): Promise<GenreList> {
+    return this.genreService
+      .findAll(limit, offset, filter)
+      .then(restListToGraph<GenreListRest, GenreRest>);
   }
 
   @Query('genre')
-  findOne(@Args('id') id: number) {
-    return this.genreService.findOne(id);
+  async genre(@Args('id') id: string): Promise<Genre> {
+    return this.genreService.findOne(id).then(restEntityToGraph);
   }
 
   @Mutation('updateGenre')
@@ -27,7 +42,7 @@ export class GenreResolver {
     return this.genreService.update(updateGenreInput.id, updateGenreInput);
   }
 
-  @Mutation('removeGenre')
+  @Mutation('deleteGenre')
   remove(@Args('id') id: number) {
     return this.genreService.remove(id);
   }

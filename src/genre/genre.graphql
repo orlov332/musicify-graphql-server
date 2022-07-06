@@ -1,24 +1,40 @@
 type Genre {
-  # Example field (placeholder)
-  exampleField: Int
+  id: ID!
+  name: String!
+  description: String!
+  country: String!
+  year: String!
 }
 
 input CreateGenreInput {
-  # Example field (placeholder)
-  exampleField: Int
+  name: String
+  description: String
+  country: String
+  year: String
 }
 
 input UpdateGenreInput {
-  id: Int!
+  id: ID!
+  name: String
+  description: String
+  country: String
+  year: String
+}
+
+type GenreList implements List {
+  items: [Genre!]!
+  limit: Int!
+  offset: Int!
+  total: Int!
 }
 
 type Query {
-  genres: [Genre]!
-  genre(id: Int!): Genre
+  genres(limit: Int! = 10, offset: Int! = 0, filter: String! = ""): GenreList!
+  genre(id: ID!): Genre
 }
 
 type Mutation {
   createGenre(createGenreInput: CreateGenreInput!): Genre!
   updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
-  removeGenre(id: Int!): Genre
+  deleteGenre(id: ID!): Genre
 }

@@ -1,0 +1,5 @@
+interface List {
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
