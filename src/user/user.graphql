@@ -1,14 +1,14 @@
 type User {
   id: ID!
-  firstName: String
-  secondName: String
-  password: String
+  firstName: String!
+  secondName: String!
+  password: String!
   email: String!
 }
 
 input UserInput {
-  firstName: String
-  secondName: String
+  firstName: String!
+  secondName: String!
   password: String!
   email: String!
 }

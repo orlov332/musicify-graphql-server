@@ -8,17 +8,17 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface UserInput {
-    firstName?: Nullable<string>;
-    secondName?: Nullable<string>;
+    firstName: string;
+    secondName: string;
     password: string;
     email: string;
 }
 
 export interface User {
     id: string;
-    firstName?: Nullable<string>;
-    secondName?: Nullable<string>;
-    password?: Nullable<string>;
+    firstName: string;
+    secondName: string;
+    password: string;
     email: string;
 }
 
