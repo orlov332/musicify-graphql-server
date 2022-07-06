@@ -2,6 +2,13 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ArtistService } from './artist.service';
 import { CreateArtistInput } from './dto/create-artist.input';
 import { UpdateArtistInput } from './dto/update-artist.input';
+import { IMutation, IQuery } from '../graphql.schema';
+
+type IArtistQuery = Pick<IQuery, 'artist' | 'artists'>;
+type IArtistMutation = Pick<
+  IMutation,
+  'createArtist' | 'updateArtist' | 'deleteArtist'
+>;
 
 @Resolver('Artist')
 export class ArtistResolver {
@@ -27,8 +34,8 @@ export class ArtistResolver {
     return this.artistService.update(updateArtistInput.id, updateArtistInput);
   }
 
-  @Mutation('removeArtist')
-  remove(@Args('id') id: number) {
+  @Mutation('deleteArtist')
+  delete(@Args('id') id: number) {
     return this.artistService.remove(id);
   }
 }

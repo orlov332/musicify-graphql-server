@@ -1,0 +1,24 @@
+type Genre {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreateGenreInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateGenreInput {
+  id: Int!
+}
+
+type Query {
+  genres: [Genre]!
+  genre(id: Int!): Genre
+}
+
+type Mutation {
+  createGenre(createGenreInput: CreateGenreInput!): Genre!
+  updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
+  removeGenre(id: Int!): Genre
+}
