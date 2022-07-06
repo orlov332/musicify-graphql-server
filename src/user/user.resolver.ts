@@ -14,8 +14,11 @@ const convertUserFromDto = (userDto: UserDto): User => {
   };
 };
 
+type IUserQuery = Pick<IQuery, 'user' | 'jwt'>;
+type IUserMutation = Pick<IMutation, 'register'>;
+
 @Resolver('User')
-export class UserResolver implements IQuery, IMutation {
+export class UserResolver implements IUserQuery, IUserMutation {
   constructor(private userService: UserService) {}
 
   @Query()
