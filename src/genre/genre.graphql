@@ -36,5 +36,5 @@ type Query {
 type Mutation {
   createGenre(createGenreInput: CreateGenreInput!): Genre!
   updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
-  deleteGenre(id: ID!): Genre
+  deleteGenre(id: ID!): DeleteResult
 }

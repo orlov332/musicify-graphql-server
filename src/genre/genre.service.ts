@@ -5,6 +5,7 @@ import { GenreListRest, GenreRest } from './entities/genre.entity';
 import { getParamObject } from '../utils';
 import { HttpService } from '@nestjs/axios';
 import { SecurityService } from '../security/security.service';
+import { DeleteResult } from '../graphql.schema';
 
 const { GENRES_URL } = process.env;
 
@@ -48,11 +49,21 @@ export class GenreService {
       .then((res) => res.data);
   }
 
-  update(id: number, updateGenreInput: UpdateGenreInput) {
-    return `This action updates a #${id} genre`;
+  async update({ id, ...toUpdate }: UpdateGenreInput) {
+    return this.httpService
+      .put<GenreRest>(`${GENRES_URL}/${id}`, toUpdate, {
+        headers: this.securityService.getAuthHeaders(),
+      })
+      .toPromise()
+      .then((res) => res.data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  async remove(id: string) {
+    return this.httpService
+      .delete<DeleteResult>(`${GENRES_URL}/${id}`, {
+        headers: this.securityService.getAuthHeaders(),
+      })
+      .toPromise()
+      .then((res) => res.data);
   }
 }

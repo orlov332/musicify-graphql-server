@@ -62,8 +62,13 @@ export interface IMutation {
     deleteArtist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
     createGenre(createGenreInput: CreateGenreInput): Genre | Promise<Genre>;
     updateGenre(updateGenreInput: UpdateGenreInput): Genre | Promise<Genre>;
-    deleteGenre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
+    deleteGenre(id: string): Nullable<DeleteResult> | Promise<Nullable<DeleteResult>>;
     register(user: UserInput): User | Promise<User>;
+}
+
+export interface DeleteResult {
+    acknowledged: boolean;
+    deletedCount: number;
 }
 
 export interface Genre {

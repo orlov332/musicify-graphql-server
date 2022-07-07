@@ -1,4 +1,43 @@
 # Genres
+mutation deleteGenre {
+  deleteGenre(id: "62c753c360b8663f87f54a78") {
+    acknowledged
+    deletedCount
+  }
+}
+
+mutation updateGenre {
+  updateGenre(
+    updateGenreInput: {
+      id: "62c70e2d60b8663f87f54a61"
+      name: "Rock&Roll"
+      description: "The coolest genre"
+      country: "UK"
+      year: 1962
+    }
+  ) {
+    id
+    name
+    description
+    country
+    year
+  }
+}
+
+mutation createGenre {
+  createGenre(
+    createGenreInput: {
+      name: "HIP-HOP"
+      description: "Hip hop is a rhythmic music that incorporates rapping, beats, basslines, scratching or beatboxing. Discover our high-quality, diverse catalog. Filter by mood, genre, vocals, length or BPM. Always protected against copyright claims with a subscription."
+      country: "USA"
+      year: 1976
+    }
+  ) {
+    id
+    name
+  }
+}
+
 query getAllGenres {
   genres {
     items {
@@ -15,7 +54,7 @@ query getAllGenres {
 }
 
 query getGenreById {
-  genre(id: "") {
+  genre(id: "62bef1c7e19a8ca62da1a53c") {
     id
     name
     description
