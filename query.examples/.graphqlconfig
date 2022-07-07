@@ -1,0 +1,16 @@
+{
+  "name": "Musicify GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:3000/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmM0NjlkOGFiYWRmYmE1NjRjMDAwYjAiLCJmaXJzdE5hbWUiOiJWYWxlcml5IiwibGFzdE5hbWUiOiJPcmxvdiIsImVtYWlsIjoibWV0OTEyOUBnbWFpbC5jb20iLCJpYXQiOjE2NTcwMzk0MDh9.wDR_LExallkD8cKPcDPm9d-QkMGyWF8p5tj0xHyde7o"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
