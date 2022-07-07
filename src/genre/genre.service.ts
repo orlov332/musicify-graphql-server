@@ -1,10 +1,10 @@
-import { ExecutionContext, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
 import { GenreListRest, GenreRest } from './entities/genre.entity';
 import { getParamObject } from '../utils';
 import { HttpService } from '@nestjs/axios';
-import { REQUEST } from '@nestjs/core';
+import { SecurityService } from '../security/security.service';
 
 const { GENRES_URL } = process.env;
 
@@ -12,14 +12,13 @@ const { GENRES_URL } = process.env;
 export class GenreService {
   constructor(
     private readonly httpService: HttpService,
-    @Inject(REQUEST) private request,
+    private readonly securityService: SecurityService,
   ) {}
 
   async create(createGenreInput: CreateGenreInput) {
-    console.log(this.request.req.headers);
     return this.httpService
       .post<GenreRest>(GENRES_URL, createGenreInput, {
-        headers: { authorization: this.request.req.headers.authorization },
+        headers: this.securityService.getAuthHeaders(),
       })
       .toPromise()
       .then((res) => res.data);
