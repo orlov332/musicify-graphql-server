@@ -3,14 +3,14 @@ type Genre {
   name: String!
   description: String!
   country: String!
-  year: String!
+  year: Int!
 }
 
 input CreateGenreInput {
-  name: String
-  description: String
-  country: String
-  year: String
+  name: String!
+  description: String!
+  country: String!
+  year: Int!
 }
 
 input UpdateGenreInput {
@@ -18,7 +18,7 @@ input UpdateGenreInput {
   name: String
   description: String
   country: String
-  year: String
+  year: Int
 }
 
 type GenreList implements List {

@@ -7,18 +7,20 @@ import { GenreListRest, GenreRest } from './entities/genre.entity';
 import { restEntityToGraph, restListToGraph } from '../utils';
 
 type IGenreQuery = Pick<IQuery, 'genres' | 'genre'>;
-// type IGenreMutation = Pick<
-//   IMutation,
-//   'createGenre' | 'updateGenre' | 'deleteGenre'
-// >;
+type IGenreMutation = Pick<
+  IMutation,
+  'createGenre' /*| 'updateGenre' | 'deleteGenre'*/
+>;
 
 @Resolver('Genre')
-export class GenreResolver implements IGenreQuery {
+export class GenreResolver implements IGenreQuery, IGenreMutation {
   constructor(private readonly genreService: GenreService) {}
 
   @Mutation('createGenre')
-  create(@Args('createGenreInput') createGenreInput: CreateGenreInput) {
-    return this.genreService.create(createGenreInput);
+  async createGenre(
+    @Args('createGenreInput') createGenreInput: CreateGenreInput,
+  ): Promise<Genre> {
+    return this.genreService.create(createGenreInput).then(restEntityToGraph);
   }
 
   @Query('genres')

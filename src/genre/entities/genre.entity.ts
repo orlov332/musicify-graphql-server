@@ -5,7 +5,7 @@ export interface GenreRest {
   name: string;
   description: string;
   country: string;
-  year: string;
+  year: number;
 }
 
 export type GenreListRest = RestList<GenreRest>;

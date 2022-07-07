@@ -1,6 +1,5 @@
 import { CreateGenreInput } from './create-genre.input';
-import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdateGenreInput extends PartialType(CreateGenreInput) {
+export interface UpdateGenreInput extends Partial<CreateGenreInput> {
   id: number;
 }

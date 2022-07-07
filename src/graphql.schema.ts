@@ -16,10 +16,10 @@ export interface UpdateArtistInput {
 }
 
 export interface CreateGenreInput {
-    name?: Nullable<string>;
-    description?: Nullable<string>;
-    country?: Nullable<string>;
-    year?: Nullable<string>;
+    name: string;
+    description: string;
+    country: string;
+    year: number;
 }
 
 export interface UpdateGenreInput {
@@ -27,7 +27,7 @@ export interface UpdateGenreInput {
     name?: Nullable<string>;
     description?: Nullable<string>;
     country?: Nullable<string>;
-    year?: Nullable<string>;
+    year?: Nullable<number>;
 }
 
 export interface UserInput {
@@ -71,7 +71,7 @@ export interface Genre {
     name: string;
     description: string;
     country: string;
-    year: string;
+    year: number;
 }
 
 export interface GenreList extends List {
