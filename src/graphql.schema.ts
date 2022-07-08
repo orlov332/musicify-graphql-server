@@ -17,15 +17,15 @@ export interface UpdateArtistInput {
 
 export interface MemberInput {
     artist: string;
-    instrument: string;
-    years: string[];
+    instrument?: Nullable<string>;
+    years?: Nullable<string[]>;
 }
 
 export interface CreateBandInput {
     name: string;
-    origin: string;
-    members: MemberInput[];
-    website: string;
+    origin?: Nullable<string>;
+    members?: Nullable<MemberInput[]>;
+    website?: Nullable<string>;
 }
 
 export interface UpdateBandInput {
@@ -94,17 +94,17 @@ export interface IMutation {
 
 export interface Band {
     id: string;
-    name: string;
-    origin: string;
-    members: Member[];
-    website: string;
-    genres: Genre[];
+    name?: Nullable<string>;
+    origin?: Nullable<string>;
+    members?: Nullable<Member[]>;
+    website?: Nullable<string>;
+    genres?: Nullable<Genre[]>;
 }
 
 export interface Member {
     artist: string;
-    instrument: string;
-    years: string[];
+    instrument?: Nullable<string>;
+    years?: Nullable<string[]>;
 }
 
 export interface DeleteResult {

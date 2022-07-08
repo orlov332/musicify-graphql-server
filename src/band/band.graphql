@@ -1,29 +1,29 @@
 type Band {
   id: ID!
-  name: String!
-  origin: String!
-  members: [Member!]!
-  website: String!
-  genres: [Genre!]!
+  name: String
+  origin: String
+  members: [Member!]
+  website: String
+  genres: [Genre!]
 }
 
 type Member {
   artist: String!
-  instrument: String!
-  years: [String!]!
+  instrument: String
+  years: [String!]
 }
 
 input MemberInput {
   artist: String!
-  instrument: String!
-  years: [String!]!
+  instrument: String
+  years: [String!]
 }
 
 input CreateBandInput {
   name: String!
-  origin: String!
-  members: [MemberInput!]!
-  website: String!
+  origin: String
+  members: [MemberInput!]
+  website: String
 }
 
 input UpdateBandInput {

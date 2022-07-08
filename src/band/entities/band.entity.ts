@@ -1,1 +1,1 @@
-export class Band {}
+export class BandRest {}
