@@ -8,6 +8,8 @@ import { GenreModule } from './genre/genre.module';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { SecurityModule } from './security/security.module';
 import { BandModule } from './band/band.module';
+import { TrackModule } from './track/track.module';
+import { AlbumModule } from './album/album.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { BandModule } from './band/band.module';
     GenreModule,
     SecurityModule,
     BandModule,
+    TrackModule,
+    AlbumModule,
   ],
 })
 export class AppModule {}
