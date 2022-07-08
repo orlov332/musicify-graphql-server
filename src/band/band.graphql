@@ -34,8 +34,15 @@ input UpdateBandInput {
   website: String
 }
 
+type BandList implements List {
+  items: [Band!]!
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
 type Query {
-  bands(limit: Int! = 10, offset: Int! = 0, filter: String! = ""): [Band]!
+  bands(limit: Int! = 10, offset: Int! = 0, filter: String! = ""): BandList!
   band(id: ID!): Band
 }
 

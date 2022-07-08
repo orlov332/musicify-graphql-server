@@ -1,4 +1,5 @@
-#Band
+# Band
+
 query getBandById {
   band(id: "62c80a3f1eab3b0b88f61750") {
     id
@@ -17,5 +18,31 @@ query getBandById {
       country
       year
     }
+  }
+}
+
+query getAllBands {
+  bands {
+    items {
+      id
+      name
+      origin
+      website
+      members {
+        artist
+        instrument
+        years
+      }
+      genres {
+        id
+        name
+        description
+        country
+        year
+      }
+    }
+    limit
+    total
+    offset
   }
 }

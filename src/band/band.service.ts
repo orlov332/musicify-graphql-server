@@ -3,8 +3,9 @@ import { CreateBandInput } from './dto/create-band.input';
 import { UpdateBandInput } from './dto/update-band.input';
 import { HttpService } from '@nestjs/axios';
 import { SecurityService } from '../security/security.service';
-import { GenreRest } from '../genre/entities/genre.entity';
-import { BandRest } from './entities/band.entity';
+import { GenreListRest, GenreRest } from '../genre/entities/genre.entity';
+import { BandListRest, BandRest } from './entities/band.entity';
+import { getParamObject } from '../common/utils';
 
 const { BAND_URL } = process.env;
 
@@ -19,11 +20,24 @@ export class BandService {
     return 'This action adds a new band';
   }
 
-  findAll(limit: number, offset: number, filter: string) {
-    return `This action returns all band`;
+  async findAll(
+    limit: number,
+    offset: number,
+    filter: string,
+  ): Promise<BandListRest> {
+    return this.httpService
+      .get<BandListRest>(BAND_URL, {
+        params: {
+          limit,
+          offset,
+          ...getParamObject(filter),
+        },
+      })
+      .toPromise()
+      .then((res) => res.data);
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<BandRest> {
     return this.httpService
       .get<BandRest>(`${BAND_URL}/${id}`)
       .toPromise()
