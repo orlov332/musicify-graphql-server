@@ -1,4 +1,4 @@
-import { RestList } from '../../common.model';
+import { RestList } from '../../common/common.model';
 
 export interface GenreRest {
   _id: string;

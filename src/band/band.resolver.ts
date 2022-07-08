@@ -1,31 +1,11 @@
-import {
-  Args,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BandService } from './band.service';
 import { CreateBandInput } from './dto/create-band.input';
 import { UpdateBandInput } from './dto/update-band.input';
-import { IMutation, IQuery } from '../graphql.schema';
-
-type IBandQuery = Pick<IQuery, 'bands' | 'band'>;
-type IBandMutation = Pick<
-  IMutation,
-  'createBand' | 'updateBand' | 'deleteBand'
->;
-
-class IdResolver {
-  @ResolveField('id')
-  getId(@Parent() { _id }) {
-    return _id;
-  }
-}
+import { IdResolver } from '../common/id-resolver';
 
 @Resolver('Band')
-export class BandResolver extends IdResolver /* implements IBandQuery, IBandMutation */ {
+export class BandResolver extends IdResolver {
   constructor(private readonly bandService: BandService) {
     super();
   }

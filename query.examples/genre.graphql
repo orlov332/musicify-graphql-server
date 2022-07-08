@@ -54,7 +54,7 @@ query getAllGenres {
 }
 
 query getGenreById {
-  genre(id: "62bef1c7e19a8ca62da1a53c") {
+  genre(id: "62c70e2d60b8663f87f54a61") {
     id
     name
     description

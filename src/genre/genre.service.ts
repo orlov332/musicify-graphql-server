@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
 import { GenreListRest, GenreRest } from './entities/genre.entity';
-import { getParamObject } from '../utils';
+import { getParamObject } from '../common/utils';
 import { HttpService } from '@nestjs/axios';
 import { SecurityService } from '../security/security.service';
 import { DeleteResult } from '../graphql.schema';

@@ -2,31 +2,20 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GenreService } from './genre.service';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
-import {
-  DeleteResult,
-  Genre,
-  GenreList,
-  IMutation,
-  IQuery,
-} from '../graphql.schema';
-import { GenreListRest, GenreRest } from './entities/genre.entity';
-import { restEntityToGraph, restListToGraph } from '../utils';
-
-type IGenreQuery = Pick<IQuery, 'genres' | 'genre'>;
-type IGenreMutation = Pick<
-  IMutation,
-  'createGenre' | 'updateGenre' | 'deleteGenre'
->;
+import { DeleteResult } from '../graphql.schema';
+import { IdResolver } from '../common/id-resolver';
 
 @Resolver('Genre')
-export class GenreResolver implements IGenreQuery, IGenreMutation {
-  constructor(private readonly genreService: GenreService) {}
+export class GenreResolver extends IdResolver {
+  constructor(private readonly genreService: GenreService) {
+    super();
+  }
 
   @Mutation('createGenre')
   async createGenre(
     @Args('createGenreInput') createGenreInput: CreateGenreInput,
-  ): Promise<Genre> {
-    return this.genreService.create(createGenreInput).then(restEntityToGraph);
+  ) {
+    return this.genreService.create(createGenreInput);
   }
 
   @Query('genres')
@@ -34,22 +23,20 @@ export class GenreResolver implements IGenreQuery, IGenreMutation {
     @Args('limit') limit: number,
     @Args('offset') offset: number,
     @Args('filter') filter: string,
-  ): Promise<GenreList> {
-    return this.genreService
-      .findAll(limit, offset, filter)
-      .then(restListToGraph<GenreListRest, GenreRest>);
+  ) {
+    return this.genreService.findAll(limit, offset, filter);
   }
 
   @Query('genre')
-  async genre(@Args('id') id: string): Promise<Genre> {
-    return this.genreService.findOne(id).then(restEntityToGraph);
+  async genre(@Args('id') id: string) {
+    return this.genreService.findOne(id);
   }
 
   @Mutation('updateGenre')
   async updateGenre(
     @Args('updateGenreInput') updateGenreInput: UpdateGenreInput,
-  ): Promise<Genre> {
-    return this.genreService.update(updateGenreInput).then(restEntityToGraph);
+  ) {
+    return this.genreService.update(updateGenreInput);
   }
 
   @Mutation('deleteGenre')
