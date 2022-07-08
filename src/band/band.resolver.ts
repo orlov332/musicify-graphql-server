@@ -12,6 +12,7 @@ import { UpdateBandInput } from './dto/update-band.input';
 import { IdResolver } from '../common/id-resolver';
 import { BandRest } from './entities/band.entity';
 import { GenreService } from '../genre/genre.service';
+import { from, mergeMap, toArray } from 'rxjs';
 
 @Resolver('Band')
 export class BandResolver extends IdResolver {
@@ -23,7 +24,7 @@ export class BandResolver extends IdResolver {
   }
 
   @Query('bands')
-  async bands(
+  bands(
     @Args('limit') limit: number,
     @Args('offset') offset: number,
     @Args('filter') filter: string,
@@ -32,27 +33,30 @@ export class BandResolver extends IdResolver {
   }
 
   @Query('band')
-  async band(@Args('id') id: string) {
+  band(@Args('id') id: string) {
     return this.bandService.findOne(id);
   }
 
   @Mutation('createBand')
-  async createBand(@Args('createBandInput') createBandInput: CreateBandInput) {
+  createBand(@Args('createBandInput') createBandInput: CreateBandInput) {
     return this.bandService.create(createBandInput);
   }
 
   @Mutation('updateBand')
-  async updateBand(@Args('updateBandInput') updateBandInput: UpdateBandInput) {
+  updateBand(@Args('updateBandInput') updateBandInput: UpdateBandInput) {
     return this.bandService.update(updateBandInput.id, updateBandInput);
   }
 
   @Mutation('deleteBand')
-  async deleteBand(@Args('id') id: number) {
+  deleteBand(@Args('id') id: number) {
     return this.bandService.remove(id);
   }
 
   @ResolveField('genres')
   getGenres(@Parent() { genresIds }: BandRest) {
-    return genresIds.map(this.genreService.findOne);
+    return from(genresIds).pipe(
+      mergeMap((id: string) => this.genreService.findOne(id)),
+      toArray(),
+    );
   }
 }

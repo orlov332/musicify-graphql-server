@@ -6,6 +6,7 @@ import { getParamObject } from '../common/utils';
 import { HttpService } from '@nestjs/axios';
 import { SecurityService } from '../security/security.service';
 import { DeleteResult } from '../graphql.schema';
+import { Observable, pluck } from 'rxjs';
 
 const { GENRES_URL } = process.env;
 
@@ -16,20 +17,19 @@ export class GenreService {
     private readonly securityService: SecurityService,
   ) {}
 
-  async create(createGenreInput: CreateGenreInput) {
+  create(createGenreInput: CreateGenreInput) {
     return this.httpService
       .post<GenreRest>(GENRES_URL, createGenreInput, {
         headers: this.securityService.getAuthHeaders(),
       })
-      .toPromise()
-      .then((res) => res.data);
+      .pipe(pluck('data'));
   }
 
-  async findAll(
+  findAll(
     limit: number,
     offset: number,
     filter: string,
-  ): Promise<GenreListRest> {
+  ): Observable<GenreListRest> {
     return this.httpService
       .get<GenreListRest>(GENRES_URL, {
         params: {
@@ -38,32 +38,28 @@ export class GenreService {
           ...getParamObject(filter),
         },
       })
-      .toPromise()
-      .then((res) => res.data);
+      .pipe(pluck('data'));
   }
 
-  findOne = async (id: string) => {
+  findOne(id: string) {
     return this.httpService
       .get<GenreRest>(`${GENRES_URL}/${id}`)
-      .toPromise()
-      .then((res) => res.data);
-  };
+      .pipe(pluck('data'));
+  }
 
-  async update({ id, ...toUpdate }: UpdateGenreInput) {
+  update({ id, ...toUpdate }: UpdateGenreInput) {
     return this.httpService
       .put<GenreRest>(`${GENRES_URL}/${id}`, toUpdate, {
         headers: this.securityService.getAuthHeaders(),
       })
-      .toPromise()
-      .then((res) => res.data);
+      .pipe(pluck('data'));
   }
 
-  async remove(id: string) {
+  remove(id: string) {
     return this.httpService
       .delete<DeleteResult>(`${GENRES_URL}/${id}`, {
         headers: this.securityService.getAuthHeaders(),
       })
-      .toPromise()
-      .then((res) => res.data);
+      .pipe(pluck('data'));
   }
 }
