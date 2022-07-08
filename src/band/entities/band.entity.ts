@@ -1,14 +1,14 @@
-export interface MemberRest {
+export interface Member {
   artist: string;
   instrument: string;
   years: string[];
 }
 
-export interface BandRest {
+export interface Band {
   _id: string;
   name: string;
   origin: string;
-  members: MemberRest[];
+  members: Member[];
   website: string;
   genresIds: string[];
 }

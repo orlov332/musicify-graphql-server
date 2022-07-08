@@ -1,26 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArtistInput } from './dto/create-artist.input';
 import { UpdateArtistInput } from './dto/update-artist.input';
+import { RestService } from '../common/rest.service';
+import { HttpService } from '@nestjs/axios';
+import { SecurityService } from '../security/security.service';
+import { Artist } from './entities/artist.entity';
+
+const { ARTISTS_URL } = process.env;
 
 @Injectable()
-export class ArtistService {
-  create(createArtistInput: CreateArtistInput) {
-    return 'This action adds a new artist';
-  }
-
-  findAll() {
-    return `This action returns all artist`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} artist`;
-  }
-
-  update(id: number, updateArtistInput: UpdateArtistInput) {
-    return `This action updates a #${id} artist`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} artist`;
+export class ArtistService extends RestService<
+  Artist,
+  CreateArtistInput,
+  UpdateArtistInput
+> {
+  constructor(httpService: HttpService, securityService: SecurityService) {
+    super(ARTISTS_URL, httpService, securityService);
   }
 }

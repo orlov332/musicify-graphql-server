@@ -1,24 +1,52 @@
 type Artist {
-  # Example field (placeholder)
-  exampleField: Int
+  id: ID!
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  country: String
+  bands: [Band]
+  instruments: [String]
 }
 
 input CreateArtistInput {
-  # Example field (placeholder)
-  exampleField: Int
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  country: String
+  bandsIds: [ID!]
+  instruments: [String]
 }
 
 input UpdateArtistInput {
-  id: Int!
+  id: ID!
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: String
+  birthPlace: String
+  country: String
+  bandsIds: [ID!]
+  instruments: [String]
+}
+
+type ArtistList implements List {
+  items: [Artist!]!
+  limit: Int!
+  offset: Int!
+  total: Int!
 }
 
 type Query {
-  artists: [Artist]!
-  artist(id: Int!): Artist
+  artists(limit: Int! = 10, offset: Int! = 0, filter: String! = ""): ArtistList!
+  artist(id: ID!): Artist
 }
 
 type Mutation {
   createArtist(createArtistInput: CreateArtistInput!): Artist!
   updateArtist(updateArtistInput: UpdateArtistInput!): Artist!
-  deleteArtist(id: Int!): Artist
+  deleteArtist(id: ID!): DeleteResult
 }

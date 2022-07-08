@@ -1,3 +1,3 @@
-import { BandRest } from '../entities/band.entity';
+import { Band } from '../entities/band.entity';
 
-export type CreateBandInput = Omit<BandRest, '_id'>;
+export type CreateBandInput = Omit<Band, '_id'>;

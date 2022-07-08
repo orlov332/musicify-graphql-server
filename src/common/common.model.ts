@@ -4,3 +4,8 @@ export interface RestList<T = any> {
   offset: number;
   total: number;
 }
+
+export interface DeleteResult {
+  acknowledged: boolean;
+  deletedCount: number;
+}

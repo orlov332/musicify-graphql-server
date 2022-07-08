@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { ArtistResolver } from './artist.resolver';
+import { HttpModule } from '@nestjs/axios';
+import { BandModule } from '../band/band.module';
 
 @Module({
-  providers: [ArtistResolver, ArtistService]
+  imports: [HttpModule, BandModule],
+  providers: [ArtistResolver, ArtistService],
 })
 export class ArtistModule {}

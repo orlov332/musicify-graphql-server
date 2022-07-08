@@ -7,5 +7,6 @@ import { GenreModule } from '../genre/genre.module';
 @Module({
   imports: [HttpModule, GenreModule],
   providers: [BandResolver, BandService],
+  exports: [BandService],
 })
 export class BandModule {}

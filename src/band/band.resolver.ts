@@ -10,7 +10,7 @@ import { BandService } from './band.service';
 import { CreateBandInput } from './dto/create-band.input';
 import { UpdateBandInput } from './dto/update-band.input';
 import { IdResolver } from '../common/id-resolver';
-import { BandRest } from './entities/band.entity';
+import { Band } from './entities/band.entity';
 import { GenreService } from '../genre/genre.service';
 import { from, mergeMap, toArray } from 'rxjs';
 
@@ -53,7 +53,7 @@ export class BandResolver extends IdResolver {
   }
 
   @ResolveField('genres')
-  getGenres(@Parent() { genresIds }: BandRest) {
+  getGenres(@Parent() { genresIds }: Band) {
     return from(genresIds).pipe(
       mergeMap((id: string) => this.genreService.findOne(id)),
       toArray(),

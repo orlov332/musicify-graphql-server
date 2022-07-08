@@ -14,9 +14,9 @@ import { BandModule } from './band/band.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./src/**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'src/graphql.schema.ts'),
-      },
+      // definitions: {
+      //   path: join(process.cwd(), 'src/graphql.schema.ts'),
+      // },
       formatError: ({ extensions, locations, message, path }: GraphQLError) => {
         const graphQLFormattedError: GraphQLFormattedError = {
           message:

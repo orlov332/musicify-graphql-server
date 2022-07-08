@@ -1,9 +1,8 @@
 import { pluck } from 'rxjs';
 import { getParamObject } from './utils';
-import { DeleteResult } from '../graphql.schema';
 import { HttpService } from '@nestjs/axios';
 import { SecurityService } from '../security/security.service';
-import { RestList } from './common.model';
+import { DeleteResult, RestList } from './common.model';
 
 export class RestService<
   T,
