@@ -44,11 +44,11 @@ export class BandResolver extends IdResolver {
 
   @Mutation('updateBand')
   updateBand(@Args('updateBandInput') updateBandInput: UpdateBandInput) {
-    return this.bandService.update(updateBandInput.id, updateBandInput);
+    return this.bandService.update(updateBandInput);
   }
 
   @Mutation('deleteBand')
-  deleteBand(@Args('id') id: number) {
+  deleteBand(@Args('id') id: string) {
     return this.bandService.remove(id);
   }
 

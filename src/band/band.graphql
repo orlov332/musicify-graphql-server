@@ -24,6 +24,7 @@ input CreateBandInput {
   origin: String
   members: [MemberInput!]
   website: String
+  genresIds: [ID!]
 }
 
 input UpdateBandInput {
@@ -32,6 +33,7 @@ input UpdateBandInput {
   origin: String
   members: [MemberInput!]
   website: String
+  genresIds: [ID!]
 }
 
 type BandList implements List {

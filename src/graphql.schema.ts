@@ -26,6 +26,7 @@ export interface CreateBandInput {
     origin?: Nullable<string>;
     members?: Nullable<MemberInput[]>;
     website?: Nullable<string>;
+    genresIds?: Nullable<string[]>;
 }
 
 export interface UpdateBandInput {
@@ -34,6 +35,7 @@ export interface UpdateBandInput {
     origin?: Nullable<string>;
     members?: Nullable<MemberInput[]>;
     website?: Nullable<string>;
+    genresIds?: Nullable<string[]>;
 }
 
 export interface CreateGenreInput {

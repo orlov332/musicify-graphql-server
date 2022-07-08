@@ -1,6 +1,4 @@
-import { RestList } from '../../common/common.model';
-
-interface MemberRest {
+export interface MemberRest {
   artist: string;
   instrument: string;
   years: string[];
@@ -14,5 +12,3 @@ export interface BandRest {
   website: string;
   genresIds: string[];
 }
-
-export type BandListRest = RestList<BandRest>;

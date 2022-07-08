@@ -46,3 +46,69 @@ query getAllBands {
     offset
   }
 }
+
+mutation createBand {
+  createBand(
+    createBandInput:   {
+      name: "Blink-182",
+      origin: "Poway , California , USA",
+      members: [
+        {
+          artist: "Mark Hoppus",
+          instrument: "Bass guitar",
+          years: ["1992", "2019"]
+        },
+        {
+          artist: "Travis Barker",
+          instrument: "drums",
+          years: ["1992", "2019"]
+        },
+        {
+          artist: "Matt Skiba",
+          instrument: "guitar , vocals , piano , drums",
+          years: ["1992", "2019"]
+        }
+      ],
+      website: "www.blink182.com",
+      genresIds: [
+        "62c70e2d60b8663f87f54a61"
+      ]
+    }) {
+    id
+    name
+    genres {
+      id
+      name
+      description
+      country
+      year
+    }
+  }
+}
+
+mutation updateBand {
+  updateBand(updateBandInput: {
+    id: "62c80a3f1eab3b0b88f61750"
+    genresIds: [
+      "62c70e2d60b8663f87f54a61",
+      "62c89488a2b20c976f69fffb"
+    ]
+  }) {
+    id
+    name
+    genres {
+      id
+      name
+      description
+      country
+      year
+    }
+  }
+}
+
+mutation deleteBand {
+  deleteBand(id: "62bef1d5263a57109794d790") {
+    acknowledged
+    deletedCount
+  }
+}
