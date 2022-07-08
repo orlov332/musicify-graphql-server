@@ -15,6 +15,27 @@ export interface UpdateArtistInput {
     id: number;
 }
 
+export interface MemberInput {
+    artist: string;
+    instrument: string;
+    years: string[];
+}
+
+export interface CreateBandInput {
+    name: string;
+    origin: string;
+    members: MemberInput[];
+    website: string;
+}
+
+export interface UpdateBandInput {
+    id: string;
+    name?: Nullable<string>;
+    origin?: Nullable<string>;
+    members?: Nullable<MemberInput[]>;
+    website?: Nullable<string>;
+}
+
 export interface CreateGenreInput {
     name: string;
     description: string;
@@ -50,6 +71,8 @@ export interface Artist {
 export interface IQuery {
     artists(): Nullable<Artist>[] | Promise<Nullable<Artist>[]>;
     artist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
+    bands(limit: number, offset: number, filter: string): Nullable<Band>[] | Promise<Nullable<Band>[]>;
+    band(id: string): Nullable<Band> | Promise<Nullable<Band>>;
     genres(limit: number, offset: number, filter: string): GenreList | Promise<GenreList>;
     genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
     user(id: string): Nullable<User> | Promise<Nullable<User>>;
@@ -60,10 +83,28 @@ export interface IMutation {
     createArtist(createArtistInput: CreateArtistInput): Artist | Promise<Artist>;
     updateArtist(updateArtistInput: UpdateArtistInput): Artist | Promise<Artist>;
     deleteArtist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
+    createBand(createBandInput: CreateBandInput): Band | Promise<Band>;
+    updateBand(updateBandInput: UpdateBandInput): Band | Promise<Band>;
+    deleteBand(id: string): Nullable<DeleteResult> | Promise<Nullable<DeleteResult>>;
     createGenre(createGenreInput: CreateGenreInput): Genre | Promise<Genre>;
     updateGenre(updateGenreInput: UpdateGenreInput): Genre | Promise<Genre>;
     deleteGenre(id: string): Nullable<DeleteResult> | Promise<Nullable<DeleteResult>>;
     register(user: UserInput): User | Promise<User>;
+}
+
+export interface Band {
+    id: string;
+    name: string;
+    origin: string;
+    members: Member[];
+    website: string;
+    genres: Genre[];
+}
+
+export interface Member {
+    artist: string;
+    instrument: string;
+    years: string[];
 }
 
 export interface DeleteResult {

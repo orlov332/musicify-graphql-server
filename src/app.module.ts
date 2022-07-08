@@ -7,6 +7,7 @@ import { ArtistModule } from './artist/artist.module';
 import { GenreModule } from './genre/genre.module';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { SecurityModule } from './security/security.module';
+import { BandModule } from './band/band.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { SecurityModule } from './security/security.module';
     ArtistModule,
     GenreModule,
     SecurityModule,
+    BandModule,
   ],
 })
 export class AppModule {}
