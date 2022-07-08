@@ -42,12 +42,12 @@ export class GenreService {
       .then((res) => res.data);
   }
 
-  async findOne(id: string) {
+  findOne = async (id: string) => {
     return this.httpService
       .get<GenreRest>(`${GENRES_URL}/${id}`)
       .toPromise()
       .then((res) => res.data);
-  }
+  };
 
   async update({ id, ...toUpdate }: UpdateGenreInput) {
     return this.httpService

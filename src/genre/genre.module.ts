@@ -6,5 +6,6 @@ import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [HttpModule],
   providers: [GenreResolver, GenreService],
+  exports: [GenreService],
 })
 export class GenreModule {}

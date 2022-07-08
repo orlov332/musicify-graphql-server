@@ -71,7 +71,7 @@ export interface Artist {
 export interface IQuery {
     artists(): Nullable<Artist>[] | Promise<Nullable<Artist>[]>;
     artist(id: number): Nullable<Artist> | Promise<Nullable<Artist>>;
-    bands(limit: number, offset: number, filter: string): Nullable<Band>[] | Promise<Nullable<Band>[]>;
+    bands(limit: number, offset: number, filter: string): BandList | Promise<BandList>;
     band(id: string): Nullable<Band> | Promise<Nullable<Band>>;
     genres(limit: number, offset: number, filter: string): GenreList | Promise<GenreList>;
     genre(id: string): Nullable<Genre> | Promise<Nullable<Genre>>;
@@ -105,6 +105,13 @@ export interface Member {
     artist: string;
     instrument?: Nullable<string>;
     years?: Nullable<string[]>;
+}
+
+export interface BandList extends List {
+    items: Band[];
+    limit: number;
+    offset: number;
+    total: number;
 }
 
 export interface DeleteResult {
