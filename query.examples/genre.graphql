@@ -1,0 +1,64 @@
+# Genres
+mutation deleteGenre {
+  deleteGenre(id: "62c753c360b8663f87f54a78") {
+    acknowledged
+    deletedCount
+  }
+}
+
+mutation updateGenre {
+  updateGenre(
+    updateGenreInput: {
+      id: "62c70e2d60b8663f87f54a61"
+      name: "Rock&Roll"
+      description: "The coolest genre"
+      country: "UK"
+      year: 1962
+    }
+  ) {
+    id
+    name
+    description
+    country
+    year
+  }
+}
+
+mutation createGenre {
+  createGenre(
+    createGenreInput: {
+      name: "Alternative Rock"
+      description: "Alternative Rock"
+      country: "USA"
+      year: 1992
+    }
+  ) {
+    id
+    name
+  }
+}
+
+query getAllGenres {
+  genres {
+    items {
+      id
+      name
+      description
+      country
+      year
+    }
+    limit
+    total
+    offset
+  }
+}
+
+query getGenreById {
+  genre(id: "62c70e2d60b8663f87f54a61") {
+    id
+    name
+    description
+    country
+    year
+  }
+}

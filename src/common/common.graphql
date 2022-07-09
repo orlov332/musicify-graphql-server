@@ -1,0 +1,10 @@
+interface List {
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
+type DeleteResult {
+  acknowledged: Boolean!
+  deletedCount: Int!
+}

@@ -1,0 +1,99 @@
+mutation createArtist {
+  createArtist(createArtistInput: {
+    firstName: "Mark",
+    secondName: "Hoppus",
+    middleName: "Allan",
+    birthDate: "15/05/1972",
+    birthPlace: "Ridgercest, California",
+    country: "USA",
+    instruments: ["Bass guitar"],
+    bandsIds: ["62c80a3f1eab3b0b88f61750"]
+  }) {
+    id
+    firstName
+    secondName
+    middleName
+    birthDate
+    birthPlace
+    country
+    instruments
+    bands {
+      id
+      name
+      website
+      genres {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation updateArtist {
+  updateArtist(updateArtistInput: {
+    id: "62c8a99d37adcbbf97be1f7a",
+    firstName: "Mark",
+    secondName: "Hoppus",
+    middleName: "Fish Guts",
+  }) {
+    id
+    firstName
+    secondName
+    middleName
+  }
+}
+
+mutation deleteArtist {
+  deleteArtist(id: "62c8aa5737adcbbf97be1f7d") {
+    deletedCount
+  }
+}
+
+query getAllArtist {
+  artists {
+    items {
+      id
+      firstName
+      secondName
+      middleName
+      birthDate
+      birthPlace
+      country
+      instruments
+      bands {
+        id
+        name
+        website
+        genres {
+          id
+          name
+        }
+      }
+    }
+    limit
+    offset
+    total
+  }
+}
+
+query getById {
+  artist(id: "62c8a99d37adcbbf97be1f7a") {
+    id
+    firstName
+    secondName
+    middleName
+    birthDate
+    birthPlace
+    country
+    instruments
+    bands {
+      id
+      name
+      website
+      genres {
+        id
+        name
+      }
+    }
+  }
+}

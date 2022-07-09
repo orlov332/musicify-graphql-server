@@ -1,0 +1,29 @@
+# Users
+query getUserById {
+  user(id: "62c469d8abadfba564c000b0") {
+    id
+    firstName
+    secondName
+    password
+    email
+  }
+
+  jwt(password: "118649qwe", email: "met9129@gmail.com")
+}
+
+mutation registerUser {
+  register(
+    user: {
+      firstName: "Adam1"
+      secondName: "Smitt1"
+      password: "1234qwer"
+      email: "Smitt1@gmail.com"
+    }
+  ) {
+    id
+    firstName
+    secondName
+    email
+    password
+  }
+}

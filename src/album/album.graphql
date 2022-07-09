@@ -1,0 +1,48 @@
+type Album {
+  id: ID!
+  name: String
+  released: Int
+  artists: [Artist]
+  bands: [Band]
+  tracks: [Track]
+  genres: [Genre]
+  image: String
+}
+
+input CreateAlbumInput {
+  name: String
+  released: Int
+  artistsIds: [ID!]
+  bandsIds: [ID!]
+  trackIds: [ID!]
+  genresIds: [ID!]
+  image: String
+}
+
+input UpdateAlbumInput {
+  id: ID!
+  name: String
+  released: Int
+  artistsIds: [ID!]
+  bandsIds: [ID!]
+  trackIds: [ID!]
+  genresIds: [ID!]
+  image: String
+}
+type AlbumList implements List {
+  items: [Album!]!
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
+type Query {
+  albums(limit: Int! = 10, offset: Int! = 0, filter: String! = ""): AlbumList!
+  album(id: ID!): Album
+}
+
+type Mutation {
+  createAlbum(createAlbumInput: CreateAlbumInput!): Album!
+  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
+  deleteAlbum(id: ID!): DeleteResult
+}

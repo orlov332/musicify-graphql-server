@@ -1,0 +1,70 @@
+# Albums
+fragment fullAlbum on Album {
+  id
+  name
+  released
+  image
+  bands {
+    id
+    name
+  }
+  genres {
+    name
+  }
+  artists {
+    firstName
+    secondName
+  }
+  tracks {
+    id
+    title
+    duration
+  }
+}
+
+mutation addAlbum {
+  createAlbum(
+    createAlbumInput: {
+      name: "Neighborhoods"
+      released: 2011
+      bandsIds: ["62c80a3f1eab3b0b88f61750"]
+      genresIds: ["62c89488a2b20c976f69fffb"]
+      artistsIds: ["62c8a99d37adcbbf97be1f7a"]
+      image: "https://upload.wikimedia.org/wikipedia/en/b/bb/Blink-182_-_Neighborhoods_cover.jpg"
+    }) {
+    ...fullAlbum
+  }
+}
+
+mutation updateAlbum {
+  updateAlbum(
+    updateAlbumInput: {
+      id: "62c9a22b7daf86b6f5159f55"
+      trackIds: ["62c9a28c72032bca8a103d8f"]
+    }) {
+    ...fullAlbum
+  }
+}
+
+mutation deleteAlbum {
+  deleteAlbum(id: "62bef1e4d845b7f5841a0d1d") {
+    deletedCount
+  }
+}
+
+query getById {
+  album(id: "62c9a22b7daf86b6f5159f55") {
+    ...fullAlbum
+  }
+}
+
+query getAll {
+  albums {
+    items {
+      ...fullAlbum
+    }
+    limit
+    offset
+    total
+  }
+}

@@ -1,0 +1,70 @@
+# Tracks
+
+mutation addTrack {
+  createTrack(
+    createTrackInput: {
+      title: "Ghost on the Dance Floor"
+      duration: 240
+      released: 2011
+      albumId: "62c9a22b7daf86b6f5159f55"
+      bandsIds: ["62c80a3f1eab3b0b88f61750"]
+      genresIds: ["62c89488a2b20c976f69fffb"]
+      artistsIds: ["62c8a99d37adcbbf97be1f7a"]
+    }) {
+    id
+    title
+  }
+}
+
+mutation updateTrack {
+  updateTrack(updateTrackInput: {
+    id: "62c9a28c72032bca8a103d8f"
+    duration: 300}) {
+    duration
+  }
+}
+
+mutation deleteTrack {
+  deleteTrack(id: "62c9ab9c72032bca8a103d9b") {
+    deletedCount
+  }
+}
+
+query getById {
+  track(id: "62c9a28c72032bca8a103d8f") {
+    ...fullTrack
+  }
+}
+
+query getAll {
+  tracks {
+    items {
+      ...fullTrack
+    }
+    limit
+    offset
+    total
+  }
+}
+
+fragment fullTrack on Track {
+  id
+  title
+  duration
+  released
+  album {
+    id
+    name
+  }
+  artists {
+    id
+    firstName
+    secondName
+  }
+  genres {
+    name
+  }
+  bands {
+    name
+  }
+}
