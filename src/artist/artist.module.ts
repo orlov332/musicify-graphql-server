@@ -7,5 +7,6 @@ import { BandModule } from '../band/band.module';
 @Module({
   imports: [HttpModule, BandModule],
   providers: [ArtistResolver, ArtistService],
+  exports: [ArtistService],
 })
 export class ArtistModule {}

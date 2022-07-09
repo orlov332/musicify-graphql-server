@@ -55,7 +55,7 @@ export class BandResolver extends IdResolver {
   @ResolveField('genres')
   getGenres(@Parent() { genresIds }: Band) {
     return from(genresIds).pipe(
-      mergeMap((id: string) => this.genreService.findOne(id)),
+      mergeMap((id) => this.genreService.findOne(id)),
       toArray(),
     );
   }
