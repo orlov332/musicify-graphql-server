@@ -10,6 +10,7 @@ import { SecurityModule } from './security/security.module';
 import { BandModule } from './band/band.module';
 import { TrackModule } from './track/track.module';
 import { AlbumModule } from './album/album.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { AlbumModule } from './album/album.module';
     BandModule,
     TrackModule,
     AlbumModule,
+    FavouritesModule,
   ],
 })
 export class AppModule {}
