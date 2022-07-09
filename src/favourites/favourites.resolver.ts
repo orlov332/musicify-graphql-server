@@ -97,8 +97,8 @@ export class FavouritesResolver extends IdResolver {
   }
 
   @ResolveField('tracks')
-  getTracks(@Parent() { artistsIds }: Favourite) {
-    return from(artistsIds).pipe(
+  getTracks(@Parent() { tracksIds }: Favourite) {
+    return from(tracksIds).pipe(
       mergeMap((id) => this.trackService.findOne(id)),
       toArray(),
     );

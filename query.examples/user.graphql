@@ -16,7 +16,7 @@ mutation registerUser {
     user: {
       firstName: "Adam1"
       secondName: "Smitt1"
-      password: "1234"
+      password: "1234qwer"
       email: "Smitt1@gmail.com"
     }
   ) {
