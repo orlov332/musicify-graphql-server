@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { AlbumResolver } from './album.resolver';
 import { HttpModule } from '@nestjs/axios';
@@ -8,7 +8,14 @@ import { GenreModule } from '../genre/genre.module';
 import { TrackModule } from '../track/track.module';
 
 @Module({
-  imports: [HttpModule, BandModule, ArtistModule, GenreModule, TrackModule],
+  imports: [
+    HttpModule,
+    BandModule,
+    ArtistModule,
+    GenreModule,
+    forwardRef(() => TrackModule),
+  ],
   providers: [AlbumResolver, AlbumService],
+  exports: [AlbumService],
 })
 export class AlbumModule {}

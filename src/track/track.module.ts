@@ -5,9 +5,10 @@ import { HttpModule } from '@nestjs/axios';
 import { BandModule } from '../band/band.module';
 import { GenreModule } from '../genre/genre.module';
 import { ArtistModule } from '../artist/artist.module';
+import { AlbumModule } from '../album/album.module';
 
 @Module({
-  imports: [HttpModule, BandModule, GenreModule, ArtistModule],
+  imports: [HttpModule, AlbumModule, BandModule, GenreModule, ArtistModule],
   providers: [TrackResolver, TrackService],
   exports: [TrackService],
 })

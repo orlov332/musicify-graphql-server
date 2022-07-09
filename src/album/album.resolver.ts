@@ -84,8 +84,8 @@ export class AlbumResolver extends IdResolver {
   }
 
   @ResolveField('tracks')
-  getTracks(@Parent() { artistsIds }: Album) {
-    return from(artistsIds).pipe(
+  getTracks(@Parent() { trackIds }: Album) {
+    return from(trackIds).pipe(
       mergeMap((id) => this.trackService.findOne(id)),
       toArray(),
     );

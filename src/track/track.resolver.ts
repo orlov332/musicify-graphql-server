@@ -15,11 +15,13 @@ import { BandService } from '../band/band.service';
 import { ArtistService } from '../artist/artist.service';
 import { Track } from './entities/track.entity';
 import { GenreService } from '../genre/genre.service';
+import { AlbumService } from '../album/album.service';
 
 @Resolver('Track')
 export class TrackResolver extends IdResolver {
   constructor(
     private readonly trackService: TrackService,
+    private readonly albumService: AlbumService,
     private readonly bandService: BandService,
     private readonly artistService: ArtistService,
     private readonly genreService: GenreService,
@@ -78,5 +80,10 @@ export class TrackResolver extends IdResolver {
       mergeMap((id) => this.artistService.findOne(id)),
       toArray(),
     );
+  }
+
+  @ResolveField('album')
+  getAlbum(@Parent() { albumId }: Track) {
+    return albumId && this.albumService.findOne(albumId);
   }
 }
